@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Litroverse Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Menu -->
+  <nav>
+    <div class="menu">
+      <button id="menuBtn">☰ Menu</button>
+      <div id="dropdown" class="dropdown-content">
+        <p>Owner: Moyra01</p>
+        <p>Email: owner@email.com</p>
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <div class="background"></div>
+  <div class="books-container">
+    <div class="books-grid" id="booksGrid">
+      <!-- Books will be inserted here by JS -->
+    </div>
+  </div>
+
+  <!-- Modal for reading -->
+  <div id="readerModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeReader">&times;</span>
+      <h2 id="bookTitle"></h2>
+      <div id="chapterContent"></div>
+      <div class="reader-controls">
+        <button id="prevChapter">Previous</button>
+        <button id="nextChapter">Next</button>
+      </div>
+      <button id="continueBtn" style="display:none;">Continue from where you left</button>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
