@@ -10,15 +10,77 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-VGW78SBZP4');
   </script>
   <!-- Google AdSense script -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js?client=ca-pub-6271585432301209"
      crossorigin="anonymous"></script>
-  <!-- Optional: AdSense verification meta tag (replace with your own if provided by AdSense) -->
+  <!-- Optional: AdSense verification meta tag -->
   <meta name="google-site-verification" content="YOUR-VERIFICATION-CODE-HERE" />
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* You can move this CSS to style.css */
+    body { font-family: 'Segoe UI', Arial, sans-serif; }
+    .books-container { max-width: 900px; margin: 40px auto; }
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 30px;
+    }
+    .book-card {
+      background: #fafafa;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 16px;
+      text-align: center;
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+    .book-card:not(.disabled):hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      cursor: pointer;
+    }
+    .book-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      filter: blur(0px);
+      transition: filter 0.2s;
+    }
+    .book-card.disabled .book-image {
+      filter: blur(8px) grayscale(85%);
+    }
+    .book-card.disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .not-published {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      right: 0;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #ff8800;
+      background: rgba(255,255,255,0.85);
+      border-radius: 0 0 12px 12px;
+      padding: 8px 0;
+      z-index: 2;
+    }
+    /* AdSense container styling */
+    .adsense-container {
+      margin: 30px auto;
+      text-align: center;
+    }
+    /* Modal styles */
+    .modal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background: rgba(0,0,0,0.6);}
+    .modal-content { background: #fff; margin: 5% auto; padding: 24px; border-radius: 10px; width: 80%; max-width: 600px; position: relative;}
+    .close { position: absolute; right: 16px; top: 12px; font-size: 2rem; cursor: pointer;}
+    .reader-controls { margin: 16px 0;}
+  </style>
 </head>
 <body>
   <!-- Menu -->
@@ -32,11 +94,43 @@
       </div>
     </div>
   </nav>
-  <!-- Main content -->
+
+  <!-- Main content background -->
   <div class="background"></div>
   <div class="books-container">
+    <!-- AdSense ad above books grid -->
+    <div class="adsense-container">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-6271585432301209"
+        data-ad-slot="1234567890"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
     <div class="books-grid" id="booksGrid">
-      <!-- Books will be inserted here by JS -->
+      <!-- Book 1: Accessible -->
+      <div class="book-card" id="book1">
+        <img class="book-image" src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Blurred black woman in chains and orange uniform">
+        <h3>The Chains That Bind</h3>
+        <p>A powerful tale of struggle and hope.</p>
+      </div>
+      <!-- Book 2: Not published -->
+      <div class="book-card disabled" id="book2">
+        <div class="not-published">Not Published Yet</div>
+        <img class="book-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Placeholder book">
+        <h3>Coming Soon</h3>
+        <p>Stay tuned for the next release.</p>
+      </div>
+      <!-- Book 3: Not published -->
+      <div class="book-card disabled" id="book3">
+        <div class="not-published">Not Published Yet</div>
+        <img class="book-image" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Placeholder book">
+        <h3>Coming Soon</h3>
+        <p>Stay tuned for future stories.</p>
+      </div>
     </div>
   </div>
 
@@ -46,8 +140,18 @@
       <span class="close" id="closeReader">&times;</span>
       <h2 id="bookTitle"></h2>
       <div id="chapterContent"></div>
-      <!-- Ad placeholder; will be filled by JS when needed -->
-      <div id="adContainer" style="margin: 20px 0; display: none;"></div>
+      <!-- AdSense ad inside modal -->
+      <div class="adsense-container">
+        <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-6271585432301209"
+          data-ad-slot="0987654321"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
       <div class="reader-controls">
         <button id="prevChapter">Previous</button>
         <button id="nextChapter">Next</button>
