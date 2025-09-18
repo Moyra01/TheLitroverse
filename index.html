@@ -34,6 +34,11 @@
       text-align: center;
       position: relative;
       transition: box-shadow 0.2s;
+      min-height: 370px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
     }
     .book-card:not(.disabled):hover {
       box-shadow: 0 4px 16px rgba(0,0,0,0.15);
@@ -41,12 +46,14 @@
     }
     .book-image {
       width: 100%;
+      max-width: 250px;
       height: 220px;
       object-fit: cover;
       border-radius: 10px;
       margin-bottom: 14px;
       filter: blur(0px);
       transition: filter 0.2s;
+      background: #ddd;
     }
     .book-card.disabled .book-image {
       filter: blur(8px) grayscale(85%);
@@ -106,10 +113,10 @@
       </script>
     </div>
     <div class="books-grid" id="booksGrid">
-      <!-- Book 1: Accessible, now uses your custom cover -->
+      <!-- Book 1: Accessible, using your uploaded cover and new title -->
       <div class="book-card" id="book1">
-        <img class="book-image" src="MJOHANNES.png" alt="Book Cover: The Chains That Bind">
-        <h3>The Chains That Bind</h3>
+        <img class="book-image" src="https://github.com/Moyra01/TheLitroverse/blob/main/MJOHANNES.png?raw=true" alt="Book Cover: A Legacy of Damage">
+        <h3>A Legacy of Damage</h3>
         <p>A powerful tale of struggle and hope.</p>
       </div>
       <!-- Book 2: Not published -->
