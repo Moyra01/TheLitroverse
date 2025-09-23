@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>The Litroverse Library</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Google Analytics tag - place immediately after <head> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGW78SBZP4"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,9 +12,9 @@
     gtag('js', new Date());
     gtag('config', 'G-VGW78SBZP4');
   </script>
-  <!-- AdSense Auto Ads script -->
+  <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6271585432301209"
-     crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -30,15 +30,16 @@
   </nav>
 
   <div class="background"></div>
-  <div class="books-container">
-    <div class="books-grid" id="booksGrid"></div>
-  </div>
 
-  <div id="readerModal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="closeReader">&times;</span>
+  <main class="books-container">
+    <div class="books-grid" id="booksGrid"></div>
+  </main>
+
+  <div id="readerModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
+    <div class="modal-content" role="document">
+      <button class="close" id="closeReader" aria-label="Close">&times;</button>
       <h2 id="bookTitle"></h2>
-      <div id="chapterContent"></div>
+      <div id="chapterContent" tabindex="0"></div>
       <div id="adContainer" style="margin: 20px 0; display: none;">
         <ins class="adsbygoogle"
           style="display:block"
