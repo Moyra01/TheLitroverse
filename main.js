@@ -4,7 +4,7 @@ const books = [
     title: "A Legacy of Damage",
     cover: "MJOHANNES.png",
     chapters: [
-      `As l drag my suitcase on the gravel road that leads from our house. I was in a hurry, I had to leave now before my mother changed her mind. But, a memory that l had plunged deep in my sub-consciousness chose to surface just at that time. <em>Seven-year-old me holding a knife to my chest and ready to plunge it through my heart and end I all. It was blunt, and the trip to sharpening it against a rock would have earned me questions from my mother who was stripping down the clothes l had washed into the dirt because they were not clean enough. Coward, couldn’t even bring myself to be seen sharpening a knife by my mother because that’s how much she scared me.</em>Another mind drifted to when l obsessed over our pictures looking for similarities, l hoped l had been the case of those kids who were switched at birth  by those nurses who did it for fun and especially when they didn’t like you. But even that, was a dead end because l was light in complexion like her, flat tummy, big breast and a generous behind. I was my mother’s daughter alright. I looked at our joined core house one last time, dug a little hole like my mother used to force me whenever l did anything new she didn’t like which was almost always and spit in it, but this time to swear never to step foot into this house again.` 
+      `As l drag my suitcase on the gravel road that leads from our house. I was in a hurry, I had to leave now before my mother changed her mind. But, a memory that l had plunged deep in my sub-consciousness chose to surface just at that time. <em>Seven-year-old me holding a knife to my chest and ready to plunge it through my heart and end I all. It was blunt, and the trip to sharpening it against a rock would have earned me questions from my mother who was stripping down the clothes l had washed into the dirt because they were not clean enough. Coward, couldn’t even bring myself to be seen sharpening a knife by my mother because that’s how much she scared me.</em>Another mind drifted to when l obsessed over our pictures looking for similarities, l hoped l had been the case of those kids who were switched at birth  by those nurses who did it for fun and especially when they didn’t like you. But even that, was a dead end because l was light in complexion like her, flat tummy, big breast and a generous behind. I was my mother’s daughter alright. I looked at our joined core house one last time, dug a little hole like my mother used to force me whenever l did anything new she didn’t like which was almost always and spit in it, but this time to swear never to step foot into this house again.`
     ],
     published: true
   },
@@ -26,6 +26,7 @@ const books = [
 
 const booksGrid = document.getElementById('booksGrid');
 booksGrid.innerHTML = "";
+
 books.forEach((book, i) => {
   const card = document.createElement('div');
   card.className = 'book-card' + (book.published ? '' : ' disabled');
@@ -36,24 +37,34 @@ books.forEach((book, i) => {
     <h3>${book.title}</h3>
     <p>${book.published ? "A powerful tale of struggle and hope." : "Stay tuned for " + (i === 1 ? "the next release." : "future stories.")}</p>
   `;
-  if (book.published) card.addEventListener('click', () => openReader(book.id));
+  if (book.published) {
+    card.addEventListener('click', () => openReader(book.id));
+  }
   booksGrid.appendChild(card);
 });
 
 function adjustGridColumns() {
-  if (window.innerWidth <= 600) booksGrid.style.gridTemplateColumns = "1fr";
-  else booksGrid.style.gridTemplateColumns = "repeat(3, 1fr)";
+  if (window.innerWidth <= 600) {
+    booksGrid.style.gridTemplateColumns = "1fr";
+  } else {
+    booksGrid.style.gridTemplateColumns = "repeat(3, 1fr)";
+  }
 }
+
 window.addEventListener('resize', adjustGridColumns);
 adjustGridColumns();
 
 const menuBtn = document.getElementById('menuBtn');
 const dropdown = document.getElementById('dropdown');
+
 menuBtn.addEventListener('click', () => {
   dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 });
-window.addEventListener('click', e => {
-  if (!menuBtn.contains(e.target) && !dropdown.contains(e.target)) dropdown.style.display = 'none';
+
+window.addEventListener('click', (e) => {
+  if (!menuBtn.contains(e.target) && !dropdown.contains(e.target)) {
+    dropdown.style.display = 'none';
+  }
 });
 
 const readerModal = document.getElementById('readerModal');
@@ -75,8 +86,10 @@ function openReader(bookId) {
     return;
   }
   currentChapter = 0;
-  readerModal.style.display = 'block';
+  readerModal.style.display = 'flex';
+  readerModal.setAttribute('aria-hidden', 'false');
   showChapter(currentChapter);
+
   const saved = localStorage.getItem('progress_' + bookId);
   if (saved && +saved > 0) {
     continueBtn.style.display = '';
@@ -95,15 +108,18 @@ function showChapter(chapterIndex) {
   currentChapter = chapterIndex;
   bookTitle.textContent = `${currentBook.title} — Page ${currentChapter + 1} of ${currentBook.chapters.length}`;
   chapterContent.innerHTML = currentBook.chapters[currentChapter];
+  chapterContent.focus();
   localStorage.setItem('progress_' + currentBook.id, currentChapter);
+
   if ((currentChapter + 1) % 3 === 0) {
     adContainer.style.display = 'block';
-    if (window.adsbygoogle) {
-      try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
-    }
+    try {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {}
   } else {
     adContainer.style.display = 'none';
   }
+
   prevChapter.disabled = currentChapter === 0;
   nextChapter.disabled = currentChapter === currentBook.chapters.length - 1;
 }
@@ -122,13 +138,15 @@ nextChapter.addEventListener('click', () => {
 
 closeReader.addEventListener('click', () => {
   readerModal.style.display = 'none';
+  readerModal.setAttribute('aria-hidden', 'true');
   currentBook = null;
   currentChapter = 0;
 });
 
-window.onclick = e => {
+window.addEventListener('click', e => {
   if (e.target === readerModal) {
     readerModal.style.display = 'none';
+    readerModal.setAttribute('aria-hidden', 'true');
     currentBook = null;
     currentChapter = 0;
   }
@@ -143,4 +161,3 @@ chapterContent.addEventListener('touchend', e => {
   else if (touchStartX - touchEndX > 60 && currentChapter < currentBook.chapters.length - 1) showChapter(currentChapter + 1);
   touchStartX = null;
 });
-
