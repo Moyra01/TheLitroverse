@@ -15,8 +15,6 @@
   <!-- AdSense Auto Ads script -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6271585432301209"
      crossorigin="anonymous"></script>
-  <meta name="google-site-verification" content="YOUR-VERIFICATION-CODE-HERE" />
-  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
@@ -39,7 +37,7 @@
     }
     nav {
       position: relative;
-      z-index: 10; /* Bring nav above background */
+      z-index: 10;
       padding: 10px 20px;
     }
     .menu button#menuBtn {
@@ -69,7 +67,7 @@
       max-width: 900px;
       margin: 40px auto;
       position: relative;
-      z-index: 5; /* above background */
+      z-index: 5;
     }
     .books-grid {
       display: grid;
@@ -130,10 +128,6 @@
       border-radius: 0 0 12px 12px;
       padding: 8px 0;
       z-index: 2;
-    }
-    .adsense-container {
-      margin: 30px auto;
-      text-align: center;
     }
     .modal {
       display: none;
@@ -202,7 +196,6 @@
   </style>
 </head>
 <body>
-  <!-- Menu -->
   <nav>
     <div class="menu">
       <button id="menuBtn">☰ Menu</button>
@@ -219,7 +212,6 @@
     <div class="books-grid" id="booksGrid"></div>
   </div>
 
-  <!-- Modal for reading -->
   <div id="readerModal" class="modal">
     <div class="modal-content">
       <span class="close" id="closeReader">&times;</span>
@@ -314,14 +306,18 @@
 
     function openReader(bookId) {
       currentBook = books.find(b => b.id === bookId);
+      if (!currentBook || !currentBook.chapters.length) {
+        alert("This book has no chapters yet.");
+        return;
+      }
       currentChapter = 0;
       readerModal.style.display = 'block';
       showChapter(currentChapter);
       const saved = localStorage.getItem('progress_' + bookId);
-      if (saved && parseInt(saved) > 0) {
+      if (saved && +saved > 0) {
         continueBtn.style.display = '';
         continueBtn.onclick = () => {
-          showChapter(parseInt(saved));
+          showChapter(+saved);
           continueBtn.style.display = 'none';
         };
       } else {
@@ -329,9 +325,10 @@
       }
     }
 
-    function showChapter(index) {
+    function showChapter(chapterIndex) {
       if (!currentBook || !currentBook.chapters.length) return;
-      currentChapter = index;
+      if (chapterIndex < 0 || chapterIndex >= currentBook.chapters.length) return;
+      currentChapter = chapterIndex;
       bookTitle.textContent = `${currentBook.title} — Page ${currentChapter + 1} of ${currentBook.chapters.length}`;
       chapterContent.innerHTML = currentBook.chapters[currentChapter];
       localStorage.setItem('progress_' + currentBook.id, currentChapter);
@@ -345,23 +342,27 @@
       }
       prevChapter.disabled = currentChapter === 0;
       nextChapter.disabled = currentChapter === currentBook.chapters.length - 1;
-      continueBtn.style.display = currentChapter > 0 ? 'inline-block' : 'none';
     }
 
     prevChapter.addEventListener('click', () => {
       if (currentBook && currentChapter > 0) showChapter(currentChapter - 1);
     });
+
     nextChapter.addEventListener('click', () => {
       if (currentBook && currentChapter < currentBook.chapters.length - 1) showChapter(currentChapter + 1);
     });
+
     closeReader.addEventListener('click', () => {
       readerModal.style.display = 'none';
       currentBook = null;
+      currentChapter = 0;
     });
+
     window.onclick = e => {
       if (e.target === readerModal) {
         readerModal.style.display = 'none';
         currentBook = null;
+        currentChapter = 0;
       }
     };
 
