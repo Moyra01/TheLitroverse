@@ -18,7 +18,21 @@
   <meta name="google-site-verification" content="YOUR-VERIFICATION-CODE-HERE" />
   <link rel="stylesheet" href="style.css">
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin:0; padding:0; }
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('https://raw.githubusercontent.com/Moyra01/TheLitroverse/main/background.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: rgba(0, 0, 0, 0.65);
+      background-blend-mode: multiply;
+      z-index: -1;
+    }
     .books-container { max-width: 900px; margin: 40px auto; }
     .books-grid {
       display: grid;
