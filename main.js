@@ -1,11 +1,12 @@
 import chapter1 from './chapter1.js';
+import chapter2 from './chapter2.js';
 
 const books = [
   {
     id: "book1",
     title: "A Legacy of Damage",
     cover: "MJOHANNES.png",
-    chapters: chapter1,
+    chapters: [...chapter1, ...chapter2],
     published: true
   },
   {
