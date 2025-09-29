@@ -1,14 +1,11 @@
+import chapter1 from './chapter1.js';
+
 const books = [
   {
     id: "book1",
     title: "A Legacy of Damage",
     cover: "MJOHANNES.png",
-    chapters: [
-      `As l drag my suitcase on the gravel road that leads from our house. I was in a hurry, I had to leave now before my mother changed her mind. But, a memory that l had plunged deep in my subconscious surfaced. The day my father died.`,
-      `Chapter 2 content goes here. You can add more chapters to test previous/next and ads.`,
-      `Chapter 3 content goes here. This is where the ad will show.`,
-      `Chapter 4 content goes here. Try navigating!`,
-    ],
+    chapters: chapter1,
     published: true
   },
   {
