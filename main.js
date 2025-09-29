@@ -4,7 +4,10 @@ const books = [
     title: "A Legacy of Damage",
     cover: "MJOHANNES.png",
     chapters: [
-      `As l drag my suitcase on the gravel road that leads from our house. I was in a hurry, I had to leave now before my mother changed her mind. But, a memory that l had plunged deep in my sub-consciousness chose to surface just at that time. <em>Seven-year-old me holding a knife to my chest and ready to plunge it through my heart and end I all. It was blunt, and the trip to sharpening it against a rock would have earned me questions from my mother who was stripping down the clothes l had washed into the dirt because they were not clean enough. Coward, couldn’t even bring myself to be seen sharpening a knife by my mother because that’s how much she scared me.</em>Another mind drifted to when l obsessed over our pictures looking for similarities, l hoped l had been the case of those kids who were switched at birth  by those nurses who did it for fun and especially when they didn’t like you. But even that, was a dead end because l was light in complexion like her, flat tummy, big breast and a generous behind. I was my mother’s daughter alright. I looked at our joined core house one last time, dug a little hole like my mother used to force me whenever l did anything new she didn’t like which was almost always and spit in it, but this time to swear never to step foot into this house again.`
+      `As l drag my suitcase on the gravel road that leads from our house. I was in a hurry, I had to leave now before my mother changed her mind. But, a memory that l had plunged deep in my subconscious surfaced. The day my father died.`,
+      `Chapter 2 content goes here. You can add more chapters to test previous/next and ads.`,
+      `Chapter 3 content goes here. This is where the ad will show.`,
+      `Chapter 4 content goes here. Try navigating!`,
     ],
     published: true
   },
@@ -111,17 +114,45 @@ function showChapter(chapterIndex) {
   chapterContent.focus();
   localStorage.setItem('progress_' + currentBook.id, currentChapter);
 
+  // Ad logic: show ad every 3rd chapter
   if ((currentChapter + 1) % 3 === 0) {
     adContainer.style.display = 'block';
+    adContainer.innerHTML = `<ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-6271585432301209"
+      data-ad-slot="6155779302"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>`;
+    // Try to trigger AdSense script
     try {
       (adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {}
+    } catch (e) {
+      adContainer.innerHTML += '<div style="padding:20px;color:#888;font-size:1.1em;">Ad would appear here in production.</div>';
+    }
   } else {
     adContainer.style.display = 'none';
+    adContainer.innerHTML = '';
   }
 
-  prevChapter.disabled = currentChapter === 0;
-  nextChapter.disabled = currentChapter === currentBook.chapters.length - 1;
+  // Enable/disable buttons visually and functionally
+  if (currentChapter === 0) {
+    prevChapter.disabled = true;
+    prevChapter.style.opacity = '0.5';
+    prevChapter.style.pointerEvents = 'none';
+  } else {
+    prevChapter.disabled = false;
+    prevChapter.style.opacity = '1';
+    prevChapter.style.pointerEvents = 'auto';
+  }
+  if (currentChapter === currentBook.chapters.length - 1) {
+    nextChapter.disabled = true;
+    nextChapter.style.opacity = '0.5';
+    nextChapter.style.pointerEvents = 'none';
+  } else {
+    nextChapter.disabled = false;
+    nextChapter.style.opacity = '1';
+    nextChapter.style.pointerEvents = 'auto';
+  }
 }
 
 prevChapter.addEventListener('click', () => {
