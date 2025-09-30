@@ -112,7 +112,7 @@ function showChapter(chapterIndex) {
   chapterContent.focus();
   localStorage.setItem('progress_' + currentBook.id, currentChapter);
 
-  // Ad logic: show ad every 3rd chapter
+  // Ad logic: show ad every 3rd chapter (page 3, 6, 9, etc.)
   if ((currentChapter + 1) % 3 === 0) {
     adContainer.style.display = 'block';
     adContainer.innerHTML = `<ins class="adsbygoogle"
@@ -121,7 +121,6 @@ function showChapter(chapterIndex) {
       data-ad-slot="6155779302"
       data-ad-format="auto"
       data-full-width-responsive="true"></ins>`;
-    // Try to trigger AdSense script
     try {
       (adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
