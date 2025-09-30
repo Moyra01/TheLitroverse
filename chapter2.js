@@ -1,4 +1,4 @@
-export const chapter2Pages = [
+const chapter2 = [
   // Page 4
   `
   <section>
@@ -17,6 +17,7 @@ export const chapter2Pages = [
     <p>“You… you… Why are you asking?” she stammers.</p>
     <p><strong>‘Come downstairs l am waiting for you.’</strong> I drop the call before she can say anything.</p>
     <p>Now I know something’s fishy. My mother doesn’t nap in the afternoon. She’s usually up and down hosting every stray relative and nosy neighbor who walks into her yard. And this crowd? Prime hosting material. But she’s missing.</p>
+  </section>
   `,
 
   // Page 5
@@ -34,6 +35,7 @@ export const chapter2Pages = [
     <p><strong>“Ha ha ha! Can you see how old she looks? How worn out she is? Even with all that mud she puts on her face, she couldn’t attract an old man on his deathbed. Don’t be funny, Austin. Who do you think would want her now? After all, the only reason she got my brother back in the day is because she’s a witch that—”</strong></p>
     <p>She doesn’t finish her sentence because she’s now choking. On her own words. And my hand.</p>
     <p>I’m in my zone. She’s kicking, scratching, trying to slap my hand away. But she shouldn’t be turning blue this fast. It’s not even my whole hand around her neck—just a few fingers and her fat neck doing the rest of the work.</p>
+  </section>
   `,
 
   // Page 6
@@ -63,3 +65,5 @@ export const chapter2Pages = [
   </section>
   `
 ];
+
+export default chapter2;
