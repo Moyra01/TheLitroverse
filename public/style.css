@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.book {
+    flex: 1 1 30%; /* 3 columns layout */
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+body {
+    background-image: url('path/to/adventist_youth_logo.png'); /* Replace with actual path to the logo image */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
