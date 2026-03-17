@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Quiz Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+        }
+        .column {
+            width: 30%;
+        }
+        form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bible Quiz Home Page</h1>
+    <div class="container">
+        <div class="column">Ezekiel</div>
+        <div class="column">Obadiah</div>
+        <div class="column">Acts</div>
+        <div class="column">Revelation</div>
+        <div class="column">Ellen G. White's The Great Controversy</div>
+    </div>
+    <form>
+        <label for="participant-name">Participant Name:</label>
+        <input type="text" id="participant-name" name="participant-name" required>
+        
+        <label for="club-name">Club Name:</label>
+        <input type="text" id="club-name" name="club-name" required>
+        
+        <label for="church">Church:</label>
+        <input type="text" id="church" name="church" required>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
