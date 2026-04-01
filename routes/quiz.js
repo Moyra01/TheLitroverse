@@ -43,28 +43,27 @@ const questions = [
   { id: 30, question: "Ezekiel was told he must not be rebellious like the ______.", answer: "House of Israel" }
 ];
 
-
 // Get all questions
 router.get('/questions', (req, res) => {
     res.json(questions);
 });
 
-// Check answer
+// Check answer (case-insensitive, trims spaces)
 router.post('/answer', (req, res) => {
     const { questionId, selectedOption } = req.body;
     const question = questions.find(q => q.id === questionId);
     if (!question) return res.status(404).json({ message: 'Question not found' });
-    const isCorrect = question.answer === selectedOption;
+    const isCorrect = question.answer.toLowerCase().trim() === selectedOption.toLowerCase().trim();
     res.json({ correct: isCorrect });
 });
 
-// Calculate score
+// Calculate score (case-insensitive, trims spaces)
 router.post('/score', (req, res) => {
     const { answers } = req.body; // answers should be an array of objects { questionId, selectedOption }
     let score = 0;
     answers.forEach(({ questionId, selectedOption }) => {
         const question = questions.find(q => q.id === questionId);
-        if (question && question.answer === selectedOption) {
+        if (question && question.answer.toLowerCase().trim() === selectedOption.toLowerCase().trim()) {
             score++;
         }
     });
